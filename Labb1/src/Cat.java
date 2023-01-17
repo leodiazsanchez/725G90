@@ -6,7 +6,7 @@ public class Cat extends Animal {
 	}
 	
 	public void introduceYourself() {
-	    System.out.println("Mjau. Jag Ã¤r en katt som heter " + getName() + ".");
-	    System.out.println("Jag Ã¤r " + getAge() + " Ã¥r gammal.");
+	    System.out.println("Mjau. Jag är en katt som heter " + getName() + ".");
+	    System.out.println("Jag är " + getAge() + " är gammal.");
 	}
 }

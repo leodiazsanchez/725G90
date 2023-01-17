@@ -14,7 +14,16 @@ public class Game {
 				100));
 		locations.add(new OutdoorsArea("You are at the town square.","You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
 		locations.get(0).addNorth(locations.get(1));
+		locations.get(0).addNPC(new Person("drunken_man", locations.get(0)));
+		locations.get(0).addNPC(new Person("bartender", locations.get(0)));
+		locations.get(0).addNPC(new Person("brute", locations.get(0)));
+		
+		
 		locations.get(1).addSouth(locations.get(0));
+		locations.get(1).addNPC(new Person("merchant", locations.get(1)));
+		locations.get(1).addItem(new WearableItem("helmet", 2.2));
+		locations.get(1).addItem(new WearableItem("elven_robe", 3));
+		locations.get(1).addItem(new Shovel("shovel",3));
 	}
 
 	public void run() {
@@ -23,22 +32,29 @@ public class Game {
 		System.out.println("Welcome to the adventure game!\nWhat is your name?");
 		name = keyboard.nextLine();
 		player = new Player(name, locations.get(0));
+
 		System.out.println("\nHello " + name
 				+ ", welcome to this magical world of wonder! You can move around by typing north/south/west/east. You will have to learn more commands as you play the game! (Hint: there is a command \"help\").");
 
 		while (true) {
 			String command;
 			player.getLocation().describeYourself();
-
 			System.out.print("What do you want to do? ");
 			command = keyboard.nextLine();
-			player.getLocation().doCommand(command, player);
-
-			for (Item it : player.getItems()) {
-				it.doCommand(command);
-			}
+			player.getLocation().doCommand(command,player);
+			
+			player.doCommand(command,player);
+			
+			for (int i = player.getItems().size()-1; i >= 0; i--){
+				player.getItems().get(i).doCommand(command,player);
+			 }
+			
+//			for (Item it : player.getItems()) {
+//				it.doCommand(command,player);
+//			}
+			
 			for (NPC npc : player.getLocation().getNPCs()) {
-				npc.doCommand(command);
+				npc.doCommand(command,player);
 			}
 		}
 	}

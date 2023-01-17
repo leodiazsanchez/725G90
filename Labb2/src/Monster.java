@@ -10,4 +10,10 @@ public class Monster extends NPC{
 		player.setHealth(player.getHealth() - 1); 
 	}
 
+	@Override
+	public void doCommand(String command, Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

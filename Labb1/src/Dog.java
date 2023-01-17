@@ -7,8 +7,8 @@ public class Dog extends Animal{
 	
 	
 	public void introduceYourself() {
-	    System.out.println("Woof. Jag Ã¤r en hund som heter " + getName() + ".");
-	    System.out.println("Jag Ã¤r " + getAge() + " Ã¥r gammal.");
+	    System.out.println("Woof. Jag är en hund som heter " + getName() + ".");
+	    System.out.println("Jag är " + getAge() + " är gammal.");
 	}
 
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class Location implements Commandable {
 	private String name;
@@ -6,6 +7,7 @@ public abstract class Location implements Commandable {
 	private String description;
 	private Location[] paths = new Location[4];
 	private ArrayList<NPC> npcs = new ArrayList<NPC>();
+	private ArrayList<Item> items = new ArrayList<Item>();
 
 	public Location(String name, String description) {
 		this.name = name;
@@ -21,12 +23,26 @@ public abstract class Location implements Commandable {
 			System.out.println("\n" + name);
 		}
 
+		if (!(this.npcs.isEmpty())) {
+			System.out.println("NPCs in this area:");
+			for (NPC npc : npcs) {
+				npc.describeYourself();
+			}
+		}
+
+		if (!(this.items.isEmpty())) {
+			System.out.println("\nItems in this area:");
+			for (Item item : items) {
+				item.describeYourself();
+			}
+		}
+
 		for (int i = 0; i < paths.length; i++) {
 			if (paths[i] != null) {
 				if (this instanceof Room) {
-					System.out.print("There is a door leading ");
+					System.out.print("\nThere is a door leading ");
 				} else if (this instanceof OutdoorsArea) {
-					System.out.print("There is a road leading ");
+					System.out.print("\nThere is a road leading ");
 				}
 
 				switch (i) {
@@ -65,6 +81,25 @@ public abstract class Location implements Commandable {
 		else if (commands[0].equals("west") && paths[3] != null) {
 			player.moveTo(paths[3]);
 		}
+
+		if (commands[0].equals("take") && !items.isEmpty()) {
+
+			for (int i = items.size()-1; i >= 0; i--){
+			    if (items.get(i).getName().contains(commands[1])){
+			    		player.giveItem(items.get(i));
+			            items.remove(i);
+			    }
+			 }
+
+//			for (Item item : items) {
+//				if(item.getName().equals(commands[1])) {
+//					player.giveItem(item);
+//					System.out.println("You picked up: " + item.getName());
+//					items.remove(item);
+//				}
+//			}
+		}
+
 	}
 
 	public ArrayList<NPC> getNPCs() {
@@ -72,13 +107,29 @@ public abstract class Location implements Commandable {
 		return npcs;
 	}
 
+	public void addNPC(NPC npc) {
+		this.npcs.add(npc);
+	}
+
 	public void addNorth(Location location) {
 		paths[0] = location;
+	}
+
+	public void addEast(Location location) {
+		paths[1] = location;
 	}
 
 	public void addSouth(Location location) {
 		paths[2] = location;
 
+	}
+
+	public void addWest(Location location) {
+		paths[3] = location;
+	}
+
+	public void addItem(Item item) {
+		this.items.add(item);
 	}
 
 }

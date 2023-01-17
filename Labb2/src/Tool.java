@@ -1,7 +1,9 @@
 
-public class Tool extends Item{
+public abstract class Tool extends Item implements Commandable{
 
-	public void use(Player player) {
-		
+	public Tool(String name,double weight) {
+		super(name, weight);
 	}
+
+
 }

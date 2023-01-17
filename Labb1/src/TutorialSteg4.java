@@ -1,7 +1,7 @@
 public class TutorialSteg4 {
 
     public static void main(String[] args) {
-        // SÃ¤tt Ã¥rtalet fÃ¶r djuren.
+        // Sätt årtalet för djuren.
         Animal.setYear(2016);
 
         // Skapa nÃ¥gra djur.
