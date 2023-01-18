@@ -8,16 +8,16 @@ public class MyStack<E> {
 	}
 
 	public void push(E element) {
-		Node<E> oldHead = head;
+		Node<E> temp = head;
 		head = new Node<E>();
 		head.setData(element);
-		head.setNext(oldHead);
+		head.setNext(temp);
 	}
 
-	public E pop() throws EmptyStackException {
+	public E pop() throws ElementNotFoundException {
 
 		if (head == null) {
-			throw new EmptyStackException();
+			throw new ElementNotFoundException();
 		}
 		E data = head.getData();
 		head = head.getNext();
@@ -40,7 +40,7 @@ public class MyStack<E> {
 		return size;
 	}
 
-	public static void main(String[] args) throws EmptyStackException {
+	public static void main(String[] args) throws ElementNotFoundException {
 		MyStack<String> stack = new MyStack<String>();
 		stack.push("Hej");
 		stack.push("Apa");

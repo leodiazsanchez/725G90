@@ -8,17 +8,20 @@ public class MyQueue<E> {
 	}
 
 	public void enqueue(E element) {
-		if (head.getData() == null) {
-			head.setData(element);
-		} else {
-			Node<E> temp = new Node<E>();
-			temp.setData(element);
+		Node<E> temp = new Node<E>();
+		temp.setData(element);
+		if (head != null) {
 			head.setNext(temp);
+		} else {
+			head = temp;
 		}
 
 	}
 
-	public E dequeue() {
+	public E dequeue() throws ElementNotFoundException {
+		if (head == null) {
+			throw new ElementNotFoundException();
+		}
 		Node<E> temp = head;
 		head = head.getNext();
 		return temp.getData();
@@ -39,7 +42,7 @@ public class MyQueue<E> {
 		return size;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ElementNotFoundException{
 
 		MyQueue<String> queue = new MyQueue<String>();
 		queue.enqueue("Hej");
