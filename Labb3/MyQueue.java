@@ -4,10 +4,6 @@ public class MyQueue<E> {
 	private Node<E> head;
 	private int size = 0;
 
-	public MyQueue() {
-		this.head = null;
-	}
-
 	public void enqueue(E element) {
 		Node<E> temp = new Node<E>();
 		temp.setData(element);

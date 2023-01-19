@@ -4,10 +4,6 @@ public class MyStack<E> {
 	private Node<E> head;
 	private int size = 0;
 
-	public MyStack() {
-		this.head = null;
-	}
-
 	public void push(E element) {
 		Node<E> temp = head;
 		head = new Node<E>();
