@@ -2,6 +2,7 @@
 public class MyList<E> {
 
 	private Node<E> head;
+	private int size = 0;
 
 	public void add(E element) {
 		Node<E> temp = new Node<E>();
@@ -9,17 +10,21 @@ public class MyList<E> {
 		if (head == null) {
 			head = temp;
 		} else {
-			Node <E> node = head;
+			Node<E> node = head;
 			while (node.getNext() != null) {
 				node = node.getNext();
 			}
-			
 			node.setNext(temp);
 		}
+		this.size++;
 	}
 	// Ska lägga till ett nytt element i listan
 
-	public E getElementAt(int i) {
+	public E getElementAt(int i) throws ElementNotFoundException {
+
+		if (i >= this.size) {
+			throw new ElementNotFoundException();
+		}
 		Node<E> node = head;
 		for (int j = 0; j < i; j++) {
 			node = node.getNext();
@@ -32,16 +37,10 @@ public class MyList<E> {
 	// större än eller lika med listans storlek.
 
 	public boolean isEmpty() {
-		return (head != null) ? true : false;
+		return (head == null) ? true : false;
 	}
 
 	public int size() {
-		int size = 0;
-		Node<E> node = head;
-		while (node != null) {
-			size++;
-			node = node.getNext();
-		}
 		return size;
 	}
 
@@ -53,7 +52,7 @@ public class MyList<E> {
 		list.add("XD");
 
 		System.out.println(list.size());
-		System.out.println(list.getElementAt(3));
+		System.out.println(list.getElementAt(2));
 		System.out.println(list.size());
 		System.out.println(list.isEmpty());
 	}

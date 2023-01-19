@@ -2,6 +2,7 @@
 public class MyStack<E> {
 
 	private Node<E> head;
+	private int size = 0;
 
 	public MyStack() {
 		this.head = null;
@@ -12,6 +13,7 @@ public class MyStack<E> {
 		head = new Node<E>();
 		head.setData(element);
 		head.setNext(temp);
+		this.size++;
 	}
 
 	public E pop() throws ElementNotFoundException {
@@ -21,23 +23,18 @@ public class MyStack<E> {
 		}
 		E data = head.getData();
 		head = head.getNext();
+		this.size--;
 		return data;
 
 	}
 	// Kastar exception om det ej finns något att poppa
 
 	public boolean isEmpty() {
-		return (head != null) ? true : false;
+		return (head == null) ? true : false;
 	}
 
 	public int size() {
-		int size = 0;
-		Node<E> node = head;
-		while (node != null) {
-			size++;
-			node = node.getNext();
-		}
-		return size;
+		return this.size;
 	}
 
 	public static void main(String[] args) throws ElementNotFoundException {
@@ -47,6 +44,8 @@ public class MyStack<E> {
 
 		System.out.println(stack.size());
 		System.out.println(stack.pop());
+		System.out.println(stack.size());
+		stack.push("XD");
 		System.out.println(stack.size());
 		System.out.println(stack.isEmpty());
 		System.out.println(stack.pop());

@@ -2,6 +2,7 @@
 public class MyQueue<E> {
 
 	private Node<E> head;
+	private int size = 0;
 
 	public MyQueue() {
 		this.head = null;
@@ -15,6 +16,7 @@ public class MyQueue<E> {
 		} else {
 			head = temp;
 		}
+		this.size++;
 
 	}
 
@@ -24,22 +26,17 @@ public class MyQueue<E> {
 		}
 		Node<E> temp = head;
 		head = head.getNext();
+		this.size--;
 		return temp.getData();
 	}
 	// Kastar exception on det inte finns något att avköa
 
 	public boolean isEmpty() {
-		return (head != null) ? true : false;
+		return (head == null) ? true : false;
 	}
 
 	public int size() {
-		int size = 0;
-		Node<E> node = head;
-		while (node != null) {
-			size++;
-			node = node.getNext();
-		}
-		return size;
+		return this.size;
 	}
 
 	public static void main(String[] args) throws ElementNotFoundException{
@@ -53,6 +50,7 @@ public class MyQueue<E> {
 		System.out.println(queue.size());
 		System.out.println(queue.isEmpty());
 		System.out.println(queue.dequeue());
-		System.out.println(queue.dequeue());
+		System.out.println(queue.size());
+		System.out.println(queue.isEmpty());
 	}
 }
