@@ -4,7 +4,7 @@ public class TutorialSteg4 {
         // Sätt årtalet för djuren.
         Animal.setYear(2016);
 
-        // Skapa nÃ¥gra djur.
+        // Skapa några djur.
         Animal kurre  = new Cat("Kurre", 6);
         Animal vilma  = new Dog("Vilma", 3);
         Animal bamse  = new Cat("Bamse", 12);
