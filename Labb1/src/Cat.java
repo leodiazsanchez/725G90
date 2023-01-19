@@ -4,9 +4,14 @@ public class Cat extends Animal {
 		super(name, age); // Animals konstruktor anropas
 
 	}
-	
+
 	public void introduceYourself() {
-	    System.out.println("Mjau. Jag är en katt som heter " + getName() + ".");
-	    System.out.println("Jag är " + getAge() + " är gammal.");
+		System.out.println("Mjau. Jag är en katt som heter " + getName() + ".");
+		System.out.println("Jag är " + getAge() + " är gammal.");
 	}
+
+	public String makesound() {
+		return "Mjau maju.";
+	}
+
 }

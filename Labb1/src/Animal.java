@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 
 public class Animal {
 
 	private static int currentYear = 2019;
 	private String name;
 	private int birthyear;
-	private Toy toy;
+	private ArrayList<Toy> toys = new ArrayList<>();
 	private Animal friend;
 
 	public Animal(String name, int age) {
@@ -38,16 +39,17 @@ public class Animal {
 	public void introduceYourself() {
 		System.out.println(name);
 	}
+	
+	public void fly() {
+		System.out.println("Jag kan inte flyga.");
+	}
+
 
 	public static void setYear(int year) {
 		currentYear = year;
 	}
 
-	public Toy getToy() {
-		return toy;
-	}
-
 	public void addToy(Toy toy) {
-		this.toy = toy;
+		this.toys.add(toy);
 	}
 }
