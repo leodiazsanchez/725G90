@@ -1,8 +1,8 @@
 
-public class Monster extends NPC{
+public abstract class Monster extends NPC{
 
-	public Monster(String name, Location position) {
-		super(name, position);
+	public Monster(Location position) {
+		super(position);
 		// TODO Auto-generated constructor stub
 	}
 	

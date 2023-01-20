@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class Location implements Commandable {
 	private String name;
@@ -24,7 +23,7 @@ public abstract class Location implements Commandable {
 		}
 
 		if (!(this.npcs.isEmpty())) {
-			System.out.println("NPCs in this area:");
+			System.out.println("\nNPCs in this area:");
 			for (NPC npc : npcs) {
 				npc.describeYourself();
 			}
@@ -83,21 +82,13 @@ public abstract class Location implements Commandable {
 		}
 
 		if (commands[0].equals("take") && !items.isEmpty()) {
-
-			for (int i = items.size()-1; i >= 0; i--){
-			    if (items.get(i).getName().contains(commands[1])){
-			    		player.giveItem(items.get(i));
-			            items.remove(i);
-			    }
-			 }
-
-//			for (Item item : items) {
-//				if(item.getName().equals(commands[1])) {
-//					player.giveItem(item);
-//					System.out.println("You picked up: " + item.getName());
-//					items.remove(item);
-//				}
-//			}
+			for (int i = items.size() - 1; i >= 0; i--) {
+				if (items.get(i).getName().contains(commands[1])) {
+					player.giveItem(items.get(i));
+					System.out.println("You picked up: " + items.get(i).getName());
+					items.remove(i);
+				}
+			}
 		}
 
 	}

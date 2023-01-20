@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Player implements Commandable{
 	private String name;
 	private Location position;
-	private int gold;
-	private int health;
+	private int gold = 0;
+	private int health = 10;
 	private ArrayList<Item> items = new ArrayList<Item>();
 
 	public Player(String name, Location position) {
@@ -57,6 +57,10 @@ public class Player implements Commandable{
 				System.out.println("\nInventory is empty!");
 			}
 
+		}
+		
+		else if(commands[0].equals("gold")) {
+			System.out.println("You have " + gold + " gold.");
 		}
 
 	}

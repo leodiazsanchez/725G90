@@ -1,16 +1,15 @@
 
 public abstract class NPC implements Commandable{
-	protected String name;
 	private Location position;
-	private int health;
+	private int health = 10;
 	
-	public NPC(String name, Location position) {
-		this.name = name;
+	public NPC(Location position) {
 		this.setPosition(position);
 	}
 	
 	public void describeYourself() {
-		System.out.println(name);
+		System.out.println(this.getClass().getName().toLowerCase());
+		
 	}
 	
 
@@ -29,5 +28,7 @@ public abstract class NPC implements Commandable{
 	public void setHealth(int health) {
 		this.health = health;
 	}
+	
+	
 	
 }
