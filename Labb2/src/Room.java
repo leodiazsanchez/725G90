@@ -9,8 +9,8 @@ public class Room extends Location {
 	}
 
 	@Override
-	public void doCommand(String command, Player player) {
-		super.doCommand(command, player);
+	public void doCommand(String[] commands, Player player) {
+		super.doCommand(commands, player);
 	}
 
 }

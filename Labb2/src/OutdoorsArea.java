@@ -1,5 +1,5 @@
 
-public class OutdoorsArea extends Location {
+public class OutdoorsArea extends Location implements Commandable{
 
 	private String weather;
 
@@ -9,8 +9,8 @@ public class OutdoorsArea extends Location {
 	}
 
 	@Override
-	public void doCommand(String command, Player player) {
-		super.doCommand(command, player);
+	public void doCommand(String[] commands, Player player) {
+		super.doCommand(commands, player);
 	}
 
 }

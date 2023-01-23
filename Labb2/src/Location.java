@@ -60,12 +60,16 @@ public abstract class Location implements Commandable {
 				}
 			}
 		}
+		
 	}
 
-	public void doCommand(String command, Player player) {
-		String[] commands = command.split(" ");
+	public void doCommand(String[] commands, Player player) {
+		
+		if (commands[0].equals("look")) {
+			player.getLocation().describeYourself();
+		} 
 
-		if (commands[0].equals("north") && paths[0] != null) {
+		else if (commands[0].equals("north") && paths[0] != null) {
 			player.moveTo(paths[0]);
 		}
 
@@ -83,12 +87,16 @@ public abstract class Location implements Commandable {
 
 		if (commands[0].equals("take") && !items.isEmpty()) {
 			for (int i = items.size() - 1; i >= 0; i--) {
-				if (items.get(i).getName().contains(commands[1])) {
+				if (items.get(i).getName().equals(commands[1])) {
 					player.giveItem(items.get(i));
 					System.out.println("You picked up: " + items.get(i).getName());
 					items.remove(i);
 				}
 			}
+		}
+		
+		for (NPC npc : npcs) {
+			npc.doCommand(commands, player);
 		}
 
 	}

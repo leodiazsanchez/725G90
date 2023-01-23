@@ -17,14 +17,21 @@ public class Game {
 				"You are sitting in a dimly lit pub in the late 1700s, surrounded by the warm glow of candles and the low murmur of conversation. The air is thick with the smell of ale and tobacco smoke, and the wooden beams overhead are dark with age. You sip your ale slowly, savoring the rich, malty flavor and listening to the locals gossip and tell tall tales. The pub is filled with a mix of people, from merchants and tradesmen to sailors and farmers, all enjoying a respite from their daily lives. The mood is relaxed and convivial, and you feel at ease as you savor your drink and take in the sights and sounds of the lively establishment.\n",
 				100));
 		locations.add(new OutdoorsArea("You are at the town square.",
-				"You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
+			"You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
+		locations.add(new OutdoorsArea("You are at the plains","Plains"));
 		locations.get(0).addNorth(locations.get(1));
 
 		locations.get(1).addSouth(locations.get(0));
-		locations.get(1).addNPC(new Beggar(locations.get(1)));
-		locations.get(1).addItem(new WearableItem("helmet", 2.2));
-		locations.get(1).addItem(new WearableItem("elven_robe", 3));
-		locations.get(1).addItem(new Shovel("shovel", 3));
+		locations.get(1).addWest(locations.get(2));
+		locations.get(1).addNPC(new Beggar());
+		Merchant merchant = new Merchant();
+		merchant.addTrade(new Sword());
+		locations.get(1).addNPC(merchant);
+		locations.get(1).addItem(new Helmet());
+		locations.get(1).addItem(new Elven_Robe());
+		locations.get(1).addItem(new Shovel());
+		
+		locations.get(2).addNPC(new Boar());
 	}
 
 	public void addCommandableObjects(Player player) {
@@ -46,20 +53,24 @@ public class Game {
 			String input;
 			Location currentLocation = player.getLocation();
 			player.getLocation().describeYourself();
+			
 			while (player.getLocation() == currentLocation) {
 				allCommandableObjects.clear();
 				allCommandableObjects.add(player);
 				addCommandableObjects(player);
+				
+				for (NPC npc : player.getLocation().getNPCs()) {
+					npc.interact(player);
+				}
+				
 				System.out.print("What do you want to do? ");
 				input = keyboard.nextLine();
-				
-				if (input.equals("look")) {
-					player.getLocation().describeYourself();
-				}
+				String[] commands = input.split(" ");
 
 				for (Commandable com : allCommandableObjects) {
-					com.doCommand(input, player);
+					com.doCommand(commands, player);
 				}
+				
 
 			}
 

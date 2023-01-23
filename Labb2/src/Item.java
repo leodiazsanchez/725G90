@@ -1,16 +1,25 @@
 
 public abstract class Item implements Commandable{
-	protected double weight;
-	protected String name;
+	private double weight;
+	private String name;
 	private int price;
 	
-	public Item (String name, double weight) {
+	public Item (String name, double weight, int price) {
 		this.name = name;
 		this.weight = weight;
+		this.price = price;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public double getWeight() {
+		return weight;
+	}
+	
+	public int getPrice() {
+		return price;
 	}
 	
 	public void describeYourself() {
@@ -18,7 +27,5 @@ public abstract class Item implements Commandable{
 	}
 
 	@Override
-	public void doCommand(String command, Player player) {
-		
-	}
+	public abstract void doCommand(String[] commands, Player player);
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Player implements Commandable{
 	private String name;
 	private Location position;
-	private int gold = 0;
+	private int gold = 500;
 	private int health = 10;
 	private ArrayList<Item> items = new ArrayList<Item>();
 
@@ -24,8 +24,12 @@ public class Player implements Commandable{
 		return health;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	public void addHealth(int health) {
+		this.health += health;
+	}
+	
+	public void removeHealth(int health) {
+		this.health -= health;
 	}
 
 	public Location getLocation() {
@@ -36,16 +40,19 @@ public class Player implements Commandable{
 		return gold;
 	}
 
-	public void setGold(int gold) {
-		this.gold = gold;
+	public void addGold(int gold) {
+		this.gold += gold;
+	}
+	
+	public void removeGold(int gold) {
+		this.gold -= gold;
 	}
 
 	public ArrayList<Item> getItems() {
 		return items;
 	}
 
-	public void doCommand(String command, Player player) {
-		String[] commands = command.split(" ");
+	public void doCommand(String[] commands, Player player) {
 
 		if (commands[0].equals("items")) {
 			if (!items.isEmpty()) {
@@ -62,12 +69,15 @@ public class Player implements Commandable{
 		else if(commands[0].equals("gold")) {
 			System.out.println("You have " + gold + " gold.");
 		}
+		
+		else if(commands[0].equals("health")) {
+			System.out.println("Current HP: " + health);
+		}
 
 	}
 
 	public void removeItem(Item item) {
 		this.items.remove(item);
-		
 	}
 
 }

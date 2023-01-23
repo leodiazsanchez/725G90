@@ -1,19 +1,23 @@
+import java.util.Random;
 
-public abstract class Monster extends NPC{
+public abstract class Monster extends NPC implements Commandable{
+	
+	private int damage;
 
-	public Monster(Location position) {
-		super(position);
-		// TODO Auto-generated constructor stub
+	public Monster(String name, int damage) {
+		super(name);
+		this.damage = damage;
 	}
 	
-	public void attack(Player player) {
-		player.setHealth(player.getHealth() - 1); 
+	public int getDamage() {
+		return damage;
 	}
+	
+	public void interact(Player player) {
+		if (new Random().nextInt(10 - 1 + 1) + 1 == 10) {
+			player.removeHealth(this.getDamage());
+		}
 
-	@Override
-	public void doCommand(String command, Player player) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

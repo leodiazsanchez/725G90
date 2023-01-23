@@ -1,11 +1,11 @@
 
 public abstract class Person extends NPC {
-
-	public Person(Location position) {
-		super(position);
+	
+	public Person(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+	public abstract void intractWith();
 
 }

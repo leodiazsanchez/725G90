@@ -1,9 +1,8 @@
 
+public class Torch extends Tool implements Commandable{
 
-public class Boar extends Monster {
-
-	public Boar() {
-		super("boar", 4);
+	public Torch() {
+		super("torch", 1, 50);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -12,4 +11,5 @@ public class Boar extends Monster {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -1,20 +1,27 @@
 
-public class WearableItem extends Item{
+public abstract class WearableItem extends Item{
 	
-	public WearableItem(String name, double weight) {
-		super(name, weight);
+	private int protection;
+	
+	public WearableItem(String name, double weight, int price, int protection) {
+		super(name, weight, price);
+		this.protection = protection;
 	}
 
 	public void putOn(Player player) {
-		System.out.println("You put on the " + name);
+		System.out.println("You put on the " + getName());
+		player.addHealth(protection);
 		player.removeItem(this);
+	}
+	
+	public int getProtection() {
+		return protection;
 	}
 
 	@Override
-	public void doCommand(String command, Player player) {
-		String[] commands = command.split(" ");
+	public void doCommand(String[] commands, Player player) {
 		
-		if (commands.length == 2 && (commands[0].equals("wear") && commands[1].equals(name))) {
+		if (commands.length == 2 && (commands[0].equals("wear") && commands[1].equals(getName()))) {
 			putOn(player);
 		}
 		
