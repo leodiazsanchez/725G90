@@ -6,6 +6,4 @@ public abstract class Person extends NPC {
 		// TODO Auto-generated constructor stub
 	}
 
-	public abstract void intractWith();
-
 }

@@ -33,6 +33,4 @@ public abstract class NPC implements Commandable {
 		return name;
 	}
 
-	public abstract void interact(Player player);
-
 }

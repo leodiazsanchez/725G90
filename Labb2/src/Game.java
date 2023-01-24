@@ -13,25 +13,44 @@ public class Game {
 
 	public void addObjects() {
 		locations = new ArrayList<>();
-		locations.add(new Room("You are at the pub.",
-				"You are sitting in a dimly lit pub in the late 1700s, surrounded by the warm glow of candles and the low murmur of conversation. The air is thick with the smell of ale and tobacco smoke, and the wooden beams overhead are dark with age. You sip your ale slowly, savoring the rich, malty flavor and listening to the locals gossip and tell tall tales. The pub is filled with a mix of people, from merchants and tradesmen to sailors and farmers, all enjoying a respite from their daily lives. The mood is relaxed and convivial, and you feel at ease as you savor your drink and take in the sights and sounds of the lively establishment.\n",
-				100));
-		locations.add(new OutdoorsArea("You are at the town square.",
-			"You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
-		locations.add(new OutdoorsArea("You are at the plains","Plains"));
-		locations.get(0).addNorth(locations.get(1));
 
+		locations.add(new OutdoorsArea("trading market",
+				"You're in a busy trading market, surrounded by vendors calling out their wares, haggling customers and the smell of spices. The sun is shining and vendors are selling various goods, including armors and gear. The market is bustling with people from different cultures. You feel excited to explore and find good deals on the armors and gear you need."));
+		locations.add(new OutdoorsArea("town square",
+				"You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
+		locations.add(new OutdoorsArea("plains",
+				"You're on a hostile plain, with cracked, dry earth and dark, ominous clouds. The wind is cold and fierce, and you feel exposed and vulnerable. The plain is barren and empty, with no sign of shelter. The only sounds are the howling wind and distant thunder."));
+		locations.add(new OutdoorsArea("cave",
+				"You are in a dim cave, holding a torch. The walls are rough and jagged, and the air is musty and cold. The cave is filled with glittering piles of gold nuggets, some as big as your fist. You feel a mix of excitement and fear as you stand among the treasure, the only sound the dripping water and your own breath."));
+		locations.add(new Room("boss room",
+				"You are standing in a dimly lit room, facing Torbjörn, your boss. Torbjörn is a middle-aged man with a thick beard and a stern expression. He is dressed in a crisp suit and tie, and his arms are crossed over his chest. He towers over you, radiating an air of authority and power. The room is silent, except for the sound of Torbjörn's heavy breathing and the ticking of the clock on the wall. You feel a mix of nervousness and determination as you stand before him, ready to defend your position.",
+				100));
+
+		locations.get(0).addNorth(locations.get(1));
+		
 		locations.get(1).addSouth(locations.get(0));
-		locations.get(1).addWest(locations.get(2));
-		locations.get(1).addNPC(new Beggar());
+		locations.get(1).addEast(locations.get(2));
+		locations.get(1).addNorth(locations.get(3));
+		
+		locations.get(2).addWest(locations.get(1));
+		locations.get(2).addEast(locations.get(4));
+		
+		locations.get(3).addSouth(locations.get(1));
+
 		Merchant merchant = new Merchant();
 		merchant.addTrade(new Sword());
-		locations.get(1).addNPC(merchant);
-		locations.get(1).addItem(new Helmet());
-		locations.get(1).addItem(new Elven_Robe());
-		locations.get(1).addItem(new Shovel());
+		merchant.addTrade(new Helmet());
+		locations.get(0).addNPC(merchant);
 		
+		locations.get(1).addNPC(new Beggar());
+		
+		locations.get(2).addItem(new Elven_Robe());
 		locations.get(2).addNPC(new Boar());
+		
+		locations.get(3).addItem(new Shovel());
+		
+		locations.get(4).addNPC(new Boss());
+
 	}
 
 	public void addCommandableObjects(Player player) {
@@ -44,7 +63,7 @@ public class Game {
 
 		System.out.println("Welcome to the adventure game!\nWhat is your name?");
 		name = keyboard.nextLine();
-		player = new Player(name, locations.get(0));
+		player = new Player(name, locations.get(1));
 
 		System.out.println("\nHello " + name
 				+ ", welcome to this magical world of wonder! You can move around by typing north/south/west/east. You will have to learn more commands as you play the game! (Hint: there is a command \"help\").");
@@ -53,17 +72,13 @@ public class Game {
 			String input;
 			Location currentLocation = player.getLocation();
 			player.getLocation().describeYourself();
-			
+
 			while (player.getLocation() == currentLocation) {
 				allCommandableObjects.clear();
 				allCommandableObjects.add(player);
 				addCommandableObjects(player);
-				
-				for (NPC npc : player.getLocation().getNPCs()) {
-					npc.interact(player);
-				}
-				
-				System.out.print("What do you want to do? ");
+
+				System.out.print("\nWhat do you want to do? ");
 				input = keyboard.nextLine();
 				String[] commands = input.split(" ");
 
@@ -71,6 +86,10 @@ public class Game {
 					com.doCommand(commands, player);
 				}
 				
+				if(player.getHealth() <= 0) {
+					System.out.println("You died!");
+					System.exit(0);
+				}
 
 			}
 

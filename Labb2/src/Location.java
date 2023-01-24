@@ -19,7 +19,7 @@ public abstract class Location implements Commandable {
 			System.out.println("\n" + description);
 			this.visited = true;
 		} else {
-			System.out.println("\n" + name);
+			System.out.println("\n" + "You are at the " + name + " again");
 		}
 
 		if (!(this.npcs.isEmpty())) {
@@ -46,27 +46,35 @@ public abstract class Location implements Commandable {
 
 				switch (i) {
 				case 0:
-					System.out.print("north.\n");
+					System.out.print("north.");
 					break;
 				case 1:
-					System.out.print("east.\n");
+					System.out.print("east.");
 					break;
 				case 2:
-					System.out.print("south.\n");
+					System.out.print("south.");
 					break;
 				case 3:
-					System.out.print("west.\n");
+					System.out.print("west.");
 					break;
 				}
 			}
 		}
 		
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	public void doCommand(String[] commands, Player player) {
 		
 		if (commands[0].equals("look")) {
 			player.getLocation().describeYourself();
+		} 
+		
+		if (commands[0].equals("help")) {
+			System.out.println("To play the game, type north, south, east, or west to move through the game's environment. You can also interact with non-player characters. Each NPC has their own unique interactions, so be sure to talk to everyone you meet. You may also encounter items or objects that you can interact with by typing \"take [item]\". Good luck and have fun!");;
 		} 
 
 		else if (commands[0].equals("north") && paths[0] != null) {

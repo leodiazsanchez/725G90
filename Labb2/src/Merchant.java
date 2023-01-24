@@ -23,7 +23,7 @@ public class Merchant extends Person implements Commandable {
 			intractWith();
 		}
 		
-		if (commands[0].equals("buy")) {
+		else if (commands[0].equals("buy")) {
 			buy(commands[1],player);
 		}
 	}
@@ -32,19 +32,18 @@ public class Merchant extends Person implements Commandable {
 		for (int i = trades.size() - 1; i >= 0; i--) {
 			
 			if (trades.get(i).getName().equals(name) && (player.getGold() < trades.get(i).getPrice())){
-				System.out.println("You do not have enougt gold to buy that item");
+				System.out.println("You do not have enough gold to buy that item");
 			}
 			else if (trades.get(i).getName().equals(name) && (player.getGold() >= trades.get(i).getPrice())) {
 				player.giveItem(trades.get(i));
 				player.removeGold(trades.get(i).getPrice());
-				System.out.println("You bought up: " + trades.get(i).getName());
+				System.out.println("You bought: " + trades.get(i).getName());
 				trades.remove(i);
 			}
 		}
 		
 	}
 	
-	@Override
 	public void intractWith() {
 		if (trades.isEmpty()) {
 			System.out.println("No trades available");
@@ -57,10 +56,5 @@ public class Merchant extends Person implements Commandable {
 
 	}
 
-	@Override
-	public void interact(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
