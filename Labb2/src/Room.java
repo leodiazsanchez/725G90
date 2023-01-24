@@ -9,8 +9,11 @@ public class Room extends Location {
 	}
 
 	@Override
-	public void doCommand(String[] commands, Player player) {
-		super.doCommand(commands, player);
+	public void printLocationVariable() {
+		System.out.println("Size: " + size + " square feet");
+		
 	}
+	
+	
 
 }

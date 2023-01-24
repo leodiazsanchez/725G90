@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Merchant extends Person implements Commandable {
 
-	public Merchant() {
-		super("merchant");
+	public Merchant(Location location) {
+		super("merchant",location);
 		// TODO Auto-generated constructor stub
 	}
 

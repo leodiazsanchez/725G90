@@ -1,9 +1,8 @@
 
 public class Beggar extends Person implements Commandable {
 
-	public Beggar() {
-		super("beggar");
-		// TODO Auto-generated constructor stub
+	public Beggar(Location location) {
+		super("beggar", location);
 	}
 
 	@Override

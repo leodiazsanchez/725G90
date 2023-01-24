@@ -4,12 +4,14 @@ public abstract class NPC implements Commandable {
 	private int health = 10;
 	private String name;
 	
-	public NPC (String name) {
+	public NPC (String name, Location location) {
 		this.name = name;
+		this.position = location;
+		location.addNPC(this);
 	}
 
 	public void describeYourself() {
-		System.out.println(this.getClass().getName().toLowerCase());
+		System.out.println(name);
 
 	}
 

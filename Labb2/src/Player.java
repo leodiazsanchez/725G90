@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
-public class Player implements Commandable{
+public class Player implements Commandable {
 	private String name;
 	private Location position;
 	private int gold = 500;
 	private int health = 10;
+	private int damage = 5;
 	private ArrayList<Item> items = new ArrayList<Item>();
 
 	public Player(String name, Location position) {
@@ -14,6 +15,10 @@ public class Player implements Commandable{
 
 	public void giveItem(Item item) {
 		this.items.add(item);
+		if(item instanceof Weapon) {
+			this.damage = (((Weapon) item).getDamage());
+			System.out.println("Your damage per hit is now: " + ((Weapon) item).getDamage());
+		}
 	}
 
 	public void moveTo(Location location) {
@@ -27,7 +32,7 @@ public class Player implements Commandable{
 	public void addHealth(int health) {
 		this.health += health;
 	}
-	
+
 	public void removeHealth(int health) {
 		this.health -= health;
 	}
@@ -43,7 +48,7 @@ public class Player implements Commandable{
 	public void addGold(int gold) {
 		this.gold += gold;
 	}
-	
+
 	public void removeGold(int gold) {
 		this.gold -= gold;
 	}
@@ -65,12 +70,12 @@ public class Player implements Commandable{
 			}
 
 		}
-		
-		else if(commands[0].equals("gold")) {
+
+		else if (commands[0].equals("gold")) {
 			System.out.println("You have " + gold + " gold.");
 		}
-		
-		else if(commands[0].equals("health")) {
+
+		else if (commands[0].equals("health")) {
 			System.out.println("Current HP: " + health);
 		}
 
@@ -80,4 +85,7 @@ public class Player implements Commandable{
 		this.items.remove(item);
 	}
 
+	public int getDamage() {
+		return damage;
+	}
 }

@@ -27,5 +27,5 @@ public abstract class Item implements Commandable{
 	}
 
 	@Override
-	public abstract void doCommand(String[] commands, Player player);
+	public abstract void doCommand(String[] commands, Player player);	
 }

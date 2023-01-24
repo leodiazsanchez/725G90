@@ -1,7 +1,8 @@
+import java.util.Random;
 
-public class OutdoorsArea extends Location implements Commandable{
+public class OutdoorsArea extends Location implements Commandable {
 
-	private String weather;
+	private String[] weatherConditions = { "sunny", "cloudy", "rainy", "snowy", "windy" };
 
 	public OutdoorsArea(String name, String description) {
 		super(name, description);
@@ -9,8 +10,13 @@ public class OutdoorsArea extends Location implements Commandable{
 	}
 
 	@Override
-	public void doCommand(String[] commands, Player player) {
-		super.doCommand(commands, player);
+	public void printLocationVariable() {
+		Random rand = new Random();
+
+		int randomNum = rand.nextInt(weatherConditions.length);
+		String weather = weatherConditions[randomNum];
+		System.out.println("The weather is currently " + weather + ".");
+
 	}
 
 }

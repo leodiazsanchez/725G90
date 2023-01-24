@@ -20,36 +20,35 @@ public class Game {
 				"You stand in the bustling town square, surrounded by the hustle and bustle of daily life. The sounds of chatter and laughter fill the air, as vendors sell their wares and people go about their business. The sun shines down on the cobblestone streets, adding to the lively atmosphere. You take in the sights and sounds of the square, feeling the energy of the community around you."));
 		locations.add(new OutdoorsArea("plains",
 				"You're on a hostile plain, with cracked, dry earth and dark, ominous clouds. The wind is cold and fierce, and you feel exposed and vulnerable. The plain is barren and empty, with no sign of shelter. The only sounds are the howling wind and distant thunder."));
-		locations.add(new OutdoorsArea("cave",
-				"You are in a dim cave, holding a torch. The walls are rough and jagged, and the air is musty and cold. The cave is filled with glittering piles of gold nuggets, some as big as your fist. You feel a mix of excitement and fear as you stand among the treasure, the only sound the dripping water and your own breath."));
+		locations.add(new Room("cave",
+				"You are in a dim cave, holding a torch. The walls are rough and jagged, and the air is musty and cold. The cave is filled with glittering piles of gold nuggets, some as big as your fist. You feel a mix of excitement and fear as you stand among the treasure, the only sound the dripping water and your own breath.",500));
 		locations.add(new Room("boss room",
 				"You are standing in a dimly lit room, facing Torbjörn, your boss. Torbjörn is a middle-aged man with a thick beard and a stern expression. He is dressed in a crisp suit and tie, and his arms are crossed over his chest. He towers over you, radiating an air of authority and power. The room is silent, except for the sound of Torbjörn's heavy breathing and the ticking of the clock on the wall. You feel a mix of nervousness and determination as you stand before him, ready to defend your position.",
-				100));
+				200));
 
 		locations.get(0).addNorth(locations.get(1));
-		
+
 		locations.get(1).addSouth(locations.get(0));
 		locations.get(1).addEast(locations.get(2));
 		locations.get(1).addNorth(locations.get(3));
-		
+
 		locations.get(2).addWest(locations.get(1));
 		locations.get(2).addEast(locations.get(4));
-		
+
 		locations.get(3).addSouth(locations.get(1));
 
-		Merchant merchant = new Merchant();
+		Merchant merchant = new Merchant(locations.get(0));
 		merchant.addTrade(new Sword());
 		merchant.addTrade(new Helmet());
-		locations.get(0).addNPC(merchant);
 		
-		locations.get(1).addNPC(new Beggar());
-		
+		new Beggar(locations.get(1));
+
 		locations.get(2).addItem(new Elven_Robe());
-		locations.get(2).addNPC(new Boar());
-		
+		new Boar(locations.get(2));
+
 		locations.get(3).addItem(new Shovel());
-		
-		locations.get(4).addNPC(new Boss());
+
+		new Boss(locations.get(4));
 
 	}
 
@@ -83,10 +82,15 @@ public class Game {
 				String[] commands = input.split(" ");
 
 				for (Commandable com : allCommandableObjects) {
-					com.doCommand(commands, player);
+					try {
+						com.doCommand(commands, player);
+					} catch (ArrayIndexOutOfBoundsException e) {
+						System.out.println("Too few arguments given in command!");
+					}
+
 				}
-				
-				if(player.getHealth() <= 0) {
+
+				if (player.getHealth() <= 0) {
 					System.out.println("You died!");
 					System.exit(0);
 				}

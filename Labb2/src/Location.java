@@ -21,6 +21,8 @@ public abstract class Location implements Commandable {
 		} else {
 			System.out.println("\n" + "You are at the " + name + " again");
 		}
+		
+		printLocationVariable();
 
 		if (!(this.npcs.isEmpty())) {
 			System.out.println("\nNPCs in this area:");
@@ -60,22 +62,26 @@ public abstract class Location implements Commandable {
 				}
 			}
 		}
-		
+
 	}
 	
+	public abstract void printLocationVariable();
+
 	public String getName() {
 		return name;
 	}
 
 	public void doCommand(String[] commands, Player player) {
-		
+
 		if (commands[0].equals("look")) {
 			player.getLocation().describeYourself();
-		} 
-		
+		}
+
 		if (commands[0].equals("help")) {
-			System.out.println("To play the game, type north, south, east, or west to move through the game's environment. You can also interact with non-player characters. Each NPC has their own unique interactions, so be sure to talk to everyone you meet. You may also encounter items or objects that you can interact with by typing \"take [item]\". Good luck and have fun!");;
-		} 
+			System.out.println(
+					"To play the game, type north, south, east, or west to move through the game's environment. You can also interact with non-player characters. Each NPC has their own unique interactions, so be sure to talk to everyone you meet. You may also encounter items or objects that you can interact with by typing \"take [item]\". Good luck and have fun!");
+			;
+		}
 
 		else if (commands[0].equals("north") && paths[0] != null) {
 			player.moveTo(paths[0]);
@@ -102,15 +108,14 @@ public abstract class Location implements Commandable {
 				}
 			}
 		}
-		
-		for (NPC npc : npcs) {
-			npc.doCommand(commands, player);
+
+		for (int i = npcs.size() - 1; i >= 0; i--) {
+			npcs.get(i).doCommand(commands, player);
 		}
 
 	}
 
 	public ArrayList<NPC> getNPCs() {
-		// TODO Auto-generated method stub
 		return npcs;
 	}
 
