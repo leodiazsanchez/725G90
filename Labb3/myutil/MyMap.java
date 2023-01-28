@@ -1,7 +1,9 @@
+package myutil;
 
 public class MyMap<K, V> {
 
 	private KeyValuePair head;
+	private KeyValuePair tail;
 	private int size = 0;
 
 	private class KeyValuePair {
@@ -25,15 +27,15 @@ public class MyMap<K, V> {
 
 	public void put(K key, V value) {
 		KeyValuePair temp = new KeyValuePair(key, value);
-		if (head != null) {
-			head.setNext(temp);
-		} else {
-			head = temp;
+		if (this.tail != null) {
+			this.tail.setNext(temp);
+		}
+		this.tail = temp;
+		if (this.head == null) {
+			this.head = temp;
 		}
 		this.size++;
 	}
-
-	// Ska lägga till ett nytt nyckel-värde-par i strukturen.
 
 	public V get(K key) {
 		KeyValuePair temp = head;
@@ -46,26 +48,13 @@ public class MyMap<K, V> {
 
 		return temp.value;
 	}
-	// Ska returnera värdet som är associerat med nyckeln K. Om det inte
-	// finns något värde associerat med den nyckeln returneras null.
 
 	public boolean isEmpty() {
-		return (head == null) ? true : false;
+		return this.size == 0;
 	}
 
 	public int size() {
 		return this.size;
 	}
 
-	public static void main(String[] args) {
-		MyMap<String, String> map = new MyMap<>();
-
-		map.put("Hej", "123");
-		map.put("Apa", "bajs");
-
-		System.out.println(map.get("XS"));
-		System.out.println(map.get("Hej"));
-		System.out.println(map.size());
-	}
-	// Returnerar antal nyckel-värde-par i strukturen.
 }

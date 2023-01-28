@@ -21,7 +21,7 @@ public abstract class WearableItem extends Item{
 	@Override
 	public void doCommand(String[] commands, Player player) {
 		
-		if (commands.length == 2 && (commands[0].equals("wear") && commands[1].equals(getName()))) {
+		if ((commands[0].equals("wear") && commands[1].equals(getName()))) {
 			putOn(player);
 		}
 		
