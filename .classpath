@@ -5,4 +5,5 @@
 	<classpathentry kind="src" path="Labb1/src"/>
 	<classpathentry kind="src" path="Labb2/src"/>
 	<classpathentry kind="src" path="Labb3"/>
+	<classpathentry kind="src" path="Labb4/src"/>
 </classpath>
