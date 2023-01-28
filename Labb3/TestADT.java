@@ -48,7 +48,7 @@ public class TestADT {
 	public static void stackTest() {
 		MyStack<Integer> stack = new MyStack<Integer>();
 
-		// Test push metoden
+		// Testar push metoden
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);
@@ -86,7 +86,7 @@ public class TestADT {
 		list.add(2);
 		list.add(3);
 
-		// Testat getElementAt metoden
+		// Testar getElementAt metoden
 		System.out.println("Expected output: 1 | Actual output: " + list.getElementAt(0));
 		System.out.println("Expected output: 2 | Actual output: " + list.getElementAt(1));
 		System.out.println("Expected output: 3 | Actual output: " + list.getElementAt(2));
@@ -96,7 +96,7 @@ public class TestADT {
 			System.out.println("ElementNotFoundException thrown as expected.");
 		}
 
-		// Test size metoden
+		// Testar size metoden
 		System.out.println("Expected output: 3 | Actual output: " + list.size());
 	}
 
@@ -126,7 +126,7 @@ public class TestADT {
 		// Testar isEmpty metoden
 		System.out.println("Expected isEmpty: false | Actual isEmpty: " + map.isEmpty());
 
-		// Test get metoden på nyckel som inte finns
+		// Testar get metoden på nyckel som inte finns
 		System.out.println("Expected value : null | Actual value: " + map.get(7));
 
 	}
