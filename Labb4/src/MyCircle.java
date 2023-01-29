@@ -11,7 +11,7 @@ public class MyCircle extends Shape {
 	@Override
 	public void drawYourself(GraphicsContext g) {
 		g.setFill(getColor());
-		g.fillOval(getX(), getY(), 10, 10);
+		g.fillOval(getX(), getY(), 50, 50);
 
 	}
 

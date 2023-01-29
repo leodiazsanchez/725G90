@@ -10,7 +10,8 @@ public class MySquare extends Shape {
 
 	@Override
 	public void drawYourself(GraphicsContext g) {
-		// TODO Auto-generated method stub
+		g.setFill(getColor());
+		g.fillRect(getX(), getY(), 50, 50);
 		
 	}
 

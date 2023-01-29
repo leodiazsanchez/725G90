@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 public class MainApp extends Application {
 
 	Button button;
@@ -21,30 +20,54 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
+		int windowWidth = 1000;
+		int windowHeight = 1000;
+
+		int sidePanelWidth = 50;
+
 		Group root = new Group();
-		
 
-		BottomPanel bPanel = new BottomPanel(500, Color.LIGHTGRAY);
-		SidePanel sPanel = new SidePanel(50, 500, Color.LIGHTGRAY);
-		sPanel.setLayoutX(440);
+		BottomPanel bPanel = new BottomPanel(windowWidth, windowHeight, Color.LIGHTGRAY);
+		Button clearButton = new Button("Rensa");
+		bPanel.getChildren().add(clearButton);
+		SidePanel sPanel = new SidePanel(sidePanelWidth, windowHeight, Color.LIGHTGRAY);
 
-		PaintSurface pSurface = new PaintSurface(490, 500);
+		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight);
+
+		pSurface.setOnMouseClicked(event -> {
+			Shape shape = null;
+			switch (sPanel.getSelectedShape()) {
+
+			case CIRCLE:
+				shape = new MySquare((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
+
+				break;
+			case SQUARE:
+				shape = new MyCircle((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
+				break;
+			case TRIANGLE:
+				shape = new MyTriangle((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
+				break;
+			}
+			shape.drawYourself(pSurface.getGraphicsContext2D());
+		});
+
+		clearButton.setOnMouseClicked(event -> {
+			pSurface.getGraphicsContext2D().clearRect(0, 0, windowWidth, windowHeight);
+		});
 
 		root.getChildren().add(pSurface);
 		root.getChildren().add(bPanel);
 		root.getChildren().add(sPanel);
-		
-		Scene scene = new Scene(root, Color.WHITE);
-		
-	
 
-		stage.setWidth(500);
-		stage.setHeight(500);
+		Scene scene = new Scene(root, Color.WHITE);
+
+		stage.setWidth(windowWidth);
+		stage.setHeight(windowWidth);
 		stage.setResizable(false);
 		stage.setTitle("Välkommen till Ritprogammet!");
 		stage.setScene(scene);
 		stage.show();
-		
 
 	}
 

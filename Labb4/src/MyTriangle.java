@@ -10,8 +10,10 @@ public class MyTriangle extends Shape {
 
 	@Override
 	public void drawYourself(GraphicsContext g) {
-		// TODO Auto-generated method stub
-		
+		g.setFill(getColor());
+		g.fillPolygon(new double[] { getX(), getX() + 50, getX() + 25 },
+				new double[] { getY() + 50, getY() + 50, getY() }, 3);
+
 	}
 
 }
