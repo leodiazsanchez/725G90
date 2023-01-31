@@ -2,45 +2,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public abstract class Shape {
-	private int x,y;
-	private Color myColor;
-	
-	public Shape(int x, int y, Color color) {
-		this.x = x;
-		this.y = y;
-		this.myColor = color;
-	}
-	
-	
-	public abstract void drawYourself(GraphicsContext g);
 
+	private int width = 25;
+	private int height = 25;
 
-	public Color getColor() {
-		return myColor;
+	public abstract void drawYourself(GraphicsContext g, int x, int y, Color color);
+
+	public int getHeight() {
+		return height;
 	}
 
-
-	public void setColor(Color myColor) {
-		this.myColor = myColor;
+	public int getWidth() {
+		return width;
 	}
 
-
-	public int getX() {
-		return x;
-	}
-
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-
-	public int getY() {
-		return y;
-	}
-
-
-	public void setY(int y) {
-		this.y = y;
-	}
 }

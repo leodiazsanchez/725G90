@@ -1,5 +1,4 @@
 
-import javafx.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -9,18 +8,15 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-	Button button;
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		int windowWidth = 600;
-		int windowHeight = 600;
+		int windowWidth = 800;
+		int windowHeight = 800;
 
 		int sidePanelWidth = 50;
 
@@ -34,20 +30,10 @@ public class MainApp extends Application {
 		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight);
 
 		pSurface.setOnMouseDragged(event -> {
-			Shape shape = null;
-			switch (sPanel.getSelectedShape()) {
-
-			case CIRCLE:
-				shape = new MySquare((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
-				break;
-			case SQUARE:
-				shape = new MyCircle((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
-				break;
-			case TRIANGLE:
-				shape = new MyTriangle((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
-				break;
-			}
-			shape.drawYourself(pSurface.getGraphicsContext2D());
+			int x = (int) event.getX();
+			int y = (int) event.getY();
+			Color color = sPanel.getSelectedColor();
+			sPanel.getSelectedShape().shape.drawYourself(pSurface.getGraphicsContext2D(), x, y, color);
 		});
 
 		clearButton.setOnMouseClicked(event -> {

@@ -1,6 +1,4 @@
 
-import java.util.ArrayList;
-
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,9 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class SidePanel extends VBox {
 
@@ -65,17 +67,17 @@ public class SidePanel extends VBox {
 
 	private class ColorButton extends Button {
 
-		private Color color;
-
 		private ColorButton(Color color) {
-			this.color = color;
 			this.setPrefWidth(35);
 			this.setPrefHeight(35);
-			this.setBackground(new Background(new BackgroundFill(color, null, null)));
+			this.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), null)));
 			this.setOnMouseClicked(event -> {
+				Color borderColor  = (color.equals(Color.BLACK) ? Color.WHITE : Color.BLACK);
+				this.setBorder(new Border(new BorderStroke(borderColor, BorderStrokeStyle.SOLID, new CornerRadii(8),
+						new BorderWidths(2))));
 				selectedColor = color;
-
 			});
+			
 
 		}
 
@@ -83,38 +85,19 @@ public class SidePanel extends VBox {
 
 	private class ShapeButton extends Button {
 
-		private Shape s;
-
 		private ShapeButton(ShapeNames shape) {
-			this.setPrefWidth(35);
-			this.setPrefHeight(35);
-			int x = (int) this.getLayoutX();
-			int y = (int) this.getLayoutY();
-
-			//MyCircle circle = new MyCircle(0, 0, Color.BLUE);
-			
-			//this.setGraphic(circle);
-			switch (shape) {
-		
-			case CIRCLE:
-				s = new MySquare(0, 0, Color.BLACK);
-				break;
-			case SQUARE:
-				s = new MyCircle(0, 0, Color.BLACK);
-				break;
-			case TRIANGLE:
-				s = new MyTriangle(0, 0, Color.BLACK);
-				break;
-			}
-			Canvas canvas = new Canvas(35, 35);
+			this.setPrefWidth(25);
+			this.setPrefHeight(25);
+			Canvas canvas = new Canvas(this.getPrefWidth(), this.getPrefHeight());
 			GraphicsContext gc = canvas.getGraphicsContext2D();
-			s.drawYourself(gc);
+			shape.shape.drawYourself(gc, 0, 0, Color.BLACK);
 			this.setGraphic(canvas);
-//			this.setGraphic(circle);
 
 			this.setOnMouseClicked(event -> {
+				this.setBorder(new Border(
+						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 				selectedShape = shape;
-
+				event.consume();
 			});
 
 		}
