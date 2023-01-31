@@ -8,7 +8,7 @@ public class BottomPanel extends HBox {
 
 	public BottomPanel(int x, int y, Color color) {
 		this.setPrefWidth(x);
-		this.setLayoutY(y - 65);
+		this.setLayoutY(y - 62);
 		this.setBackground(new Background(new BackgroundFill(color, null, null)));
 	}
 

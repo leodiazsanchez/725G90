@@ -1,7 +1,6 @@
 
 import javafx.*;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +19,8 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		int windowWidth = 1000;
-		int windowHeight = 1000;
+		int windowWidth = 600;
+		int windowHeight = 600;
 
 		int sidePanelWidth = 50;
 
@@ -34,13 +33,12 @@ public class MainApp extends Application {
 
 		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight);
 
-		pSurface.setOnMouseClicked(event -> {
+		pSurface.setOnMouseDragged(event -> {
 			Shape shape = null;
 			switch (sPanel.getSelectedShape()) {
 
 			case CIRCLE:
 				shape = new MySquare((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());
-
 				break;
 			case SQUARE:
 				shape = new MyCircle((int) event.getX(), (int) event.getY(), sPanel.getSelectedColor());

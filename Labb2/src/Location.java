@@ -143,5 +143,7 @@ public abstract class Location implements Commandable {
 	public void addItem(Item item) {
 		this.items.add(item);
 	}
+	
+	
 
 }
