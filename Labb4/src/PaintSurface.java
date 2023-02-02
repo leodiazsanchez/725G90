@@ -2,17 +2,45 @@
 import javafx.scene.canvas.Canvas;
 
 public class PaintSurface extends Canvas {
-	private Model myModel;
+	private Model model;
 
-	public PaintSurface(int x, int y) {
+	public PaintSurface(int x, int y, Model model) {
 		super(x, y);
-		myModel = new Model();
+		this.model = model;
+		this.setOnMouseDragged(event -> {
+			try {
+				this.draw((int) event.getX(), (int) event.getY());
+			} catch (NullPointerException npe) {
+				System.out.println("No shape selected");
+			}
+		
+		});
+		
+		this.setOnMouseClicked(event -> {
+			try {
+				this.draw((int) event.getX(), (int) event.getY());
+			} catch (NullPointerException npe) {
+				System.out.println("No shape selected");
+			}
+		
+		});
 
 	}
 
-	public Model getModel() {
+	public void draw(int x, int y) {
+		Shape shape = model.getShape();
+		shape.setX(x);
+		shape.setY(y);
+		shape.setColor(model.getColor());
+		model.getContents().add(shape);
+		//System.out.println(model.getContents());
+		shape.drawYourself(getGraphicsContext2D());
 
-		return myModel;
+	}
+
+	public void clear(int windowWidth, int windowHeight) {
+		this.getGraphicsContext2D().clearRect(0, 0, windowWidth, windowHeight);
+
 	}
 
 }

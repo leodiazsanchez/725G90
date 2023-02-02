@@ -21,24 +21,14 @@ public class MainApp extends Application {
 		int sidePanelWidth = 50;
 
 		Group root = new Group();
+		Model model = new Model();
+		
+		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight, model);
+		BottomPanel bPanel = new BottomPanel(windowWidth, windowHeight, Color.LIGHTGRAY,model, pSurface);
+		SidePanel sPanel = new SidePanel(sidePanelWidth, windowHeight, Color.LIGHTGRAY, model);
 
-		BottomPanel bPanel = new BottomPanel(windowWidth, windowHeight, Color.LIGHTGRAY);
-		Button clearButton = new Button("Rensa");
-		bPanel.getChildren().add(clearButton);
-		SidePanel sPanel = new SidePanel(sidePanelWidth, windowHeight, Color.LIGHTGRAY);
+	
 
-		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight);
-
-		pSurface.setOnMouseDragged(event -> {
-			int x = (int) event.getX();
-			int y = (int) event.getY();
-			Color color = sPanel.getSelectedColor();
-			sPanel.getSelectedShape().shape.drawYourself(pSurface.getGraphicsContext2D(), x, y, color);
-		});
-
-		clearButton.setOnMouseClicked(event -> {
-			pSurface.getGraphicsContext2D().clearRect(0, 0, windowWidth, windowHeight);
-		});
 
 		root.getChildren().add(pSurface);
 		root.getChildren().add(bPanel);

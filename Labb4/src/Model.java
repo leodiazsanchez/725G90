@@ -8,15 +8,21 @@ public class Model {
 	private Color currentColor;
 
 	public void setColor(Color c) {
+		System.out.println("Color set: " + c);
 		currentColor = c;
 	}
 
 	public void setShape(Shape s) {
+		System.out.println("Shape set: " + s);
 		currentShape = s;
 	}
 
 	public Shape getShape() {
 		return this.currentShape;
+	}
+	
+	public Color getColor() {
+		return this.currentColor;
 	}
 
 	public ArrayList<Shape> getContents() {
@@ -25,6 +31,7 @@ public class Model {
 	}
 
 	public void clear() {
+		System.out.println("Clear");
 		contents.clear();
 	}
 }

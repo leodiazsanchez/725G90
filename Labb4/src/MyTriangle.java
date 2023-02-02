@@ -3,11 +3,15 @@ import javafx.scene.paint.Color;
 
 public class MyTriangle extends Shape {
 
+	public MyTriangle(int x, int y, Color color) {
+		super(x, y, color);
+	}
+
 	@Override
-	public void drawYourself(GraphicsContext g, int x, int y, Color color) {
-		g.setFill(color);
-		g.fillPolygon(new double[] { x, x + getWidth(),x + getWidth() / 2 },
-				new double[] { y + getHeight(), y + getHeight(), y }, 3);
+	public void drawYourself(GraphicsContext g) {
+		g.setFill(getColor());
+		g.fillPolygon(new double[] { getX(), getX() + getWidth(),getX() + getWidth() / 2 },
+				new double[] { getY() + getHeight(), getY() + getHeight(), getY() }, 3);
 
 	}
 
