@@ -1,8 +1,6 @@
-
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -21,14 +19,11 @@ public class MainApp extends Application {
 		int sidePanelWidth = 50;
 
 		Group root = new Group();
-		Model model = new Model();
 		
+		Model model = new Model();
 		PaintSurface pSurface = new PaintSurface(windowWidth, windowHeight, model);
-		BottomPanel bPanel = new BottomPanel(windowWidth, windowHeight, Color.LIGHTGRAY,model, pSurface);
+		BottomPanel bPanel = new BottomPanel(windowWidth,  windowHeight, Color.LIGHTGRAY,model, pSurface);
 		SidePanel sPanel = new SidePanel(sidePanelWidth, windowHeight, Color.LIGHTGRAY, model);
-
-	
-
 
 		root.getChildren().add(pSurface);
 		root.getChildren().add(bPanel);

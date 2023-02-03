@@ -1,4 +1,3 @@
-
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -33,10 +30,11 @@ public class BottomPanel extends HBox {
 		Button saveButton = new Button("Save");
 		this.getChildren().add(saveButton);
 		saveButton.setOnMouseClicked(event -> {
-			System.out.println("XD");
+			
 			for (Shape s : model.getContents()) {
 				System.out.println(s);
 			}
+			
 			FileChooser fc = new FileChooser();
 			File file = fc.showSaveDialog(null);
 
@@ -45,13 +43,9 @@ public class BottomPanel extends HBox {
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 				oos.writeObject(model.getContents());
-
 				oos.close();
-			}
-
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-
 			}
 
 		});
@@ -59,23 +53,21 @@ public class BottomPanel extends HBox {
 		Button openButton = new Button("Open");
 		this.getChildren().add(openButton);
 		openButton.setOnMouseClicked(event -> {
+			
 			FileChooser fc = new FileChooser();
 			File file = fc.showOpenDialog(null);
 
 			try {
 				FileInputStream fis = new FileInputStream(file);
 				ObjectInputStream ois = new ObjectInputStream(fis);
+				
 				model.getContents().clear();
-
 				ArrayList<Shape> shapes = (ArrayList<Shape>) ois.readObject();
+				
 				for (Shape s : shapes) {
 					model.setShape(s);
 					ps.draw(s.getX(), s.getY());
 				}
-//					model.getContents().add(shape);
-//					System.out.println(shape);
-//					model.setShape(shape);
-//					ps.draw(shape.getX(), shape.getY());
 
 				fis.close();
 			} catch (EOFException e) {

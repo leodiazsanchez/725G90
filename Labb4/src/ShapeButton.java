@@ -10,20 +10,28 @@ import javafx.scene.paint.Color;
 
 public class ShapeButton extends Button {
 
-		public ShapeButton(Shape shape, Model model) {
-			this.setPrefWidth(25);
-			this.setPrefHeight(25);
-			Canvas canvas = new Canvas(this.getPrefWidth(), this.getPrefHeight());
-			GraphicsContext gc = canvas.getGraphicsContext2D();
-			shape.drawYourself(gc);
-			this.setGraphic(canvas);
+	public ShapeButton(Shape shape, Model model, SidePanel sPanel) {
+		this.setPrefWidth(25);
+		this.setPrefHeight(25);
+		this.setFocusTraversable(false);
+		Canvas canvas = new Canvas(this.getPrefWidth(), this.getPrefHeight());
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		shape.drawYourself(gc);
+		this.setGraphic(canvas);
 
-			this.setOnMouseClicked(event -> {
-				this.setBorder(new Border(
-						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
-				model.setShape(shape);
-			});
+		this.setOnMouseClicked(event -> {
+			
+			for (ShapeButton b : sPanel.getShapeButtons()) {
+				b.setBorder(null);
+			}
+			
+			this.setBorder(new Border(
+					new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 
-		}
+			model.setShape(shape);
+
+		});
 
 	}
+
+}

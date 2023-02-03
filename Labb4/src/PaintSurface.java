@@ -1,4 +1,3 @@
-
 import javafx.scene.canvas.Canvas;
 
 public class PaintSurface extends Canvas {
@@ -7,13 +6,13 @@ public class PaintSurface extends Canvas {
 	public PaintSurface(int x, int y, Model model) {
 		super(x, y);
 		this.model = model;
+		
 		this.setOnMouseDragged(event -> {
 			try {
 				this.draw((int) event.getX(), (int) event.getY());
 			} catch (NullPointerException npe) {
-				System.out.println("No shape selected");
+				System.out.println("No shape or color selected");
 			} catch (CloneNotSupportedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -23,9 +22,8 @@ public class PaintSurface extends Canvas {
 			try {
 				this.draw((int) event.getX(), (int) event.getY());
 			} catch (NullPointerException npe) {
-				System.out.println("No shape selected");
+				System.out.println("No shape or color selected");
 			} catch (CloneNotSupportedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -39,7 +37,6 @@ public class PaintSurface extends Canvas {
 		shape.setY(y);
 		shape.setColor(model.getColor());
 		model.getContents().add(shape);
-		System.out.println(shape);
 		shape.drawYourself(getGraphicsContext2D());
 
 	}

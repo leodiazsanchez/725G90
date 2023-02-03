@@ -8,12 +8,10 @@ public class Model {
 	private Color currentColor;
 
 	public void setColor(Color c) {
-		System.out.println("Color set: " + c);
 		currentColor = c;
 	}
 
 	public void setShape(Shape s) {
-		System.out.println("Shape set: " + s);
 		currentShape = s;
 	}
 
@@ -31,7 +29,6 @@ public class Model {
 	}
 
 	public void clear() {
-		System.out.println("Clear");
 		contents.clear();
 	}
 }

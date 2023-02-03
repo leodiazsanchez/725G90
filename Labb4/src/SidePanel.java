@@ -1,16 +1,8 @@
-
+import java.util.ArrayList;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -20,6 +12,9 @@ public class SidePanel extends VBox {
 			Color.WHITE, Color.ORANGE };
 	
 	private Shape[] shapes = {new MyCircle(0,0, Color.BLACK), new MySquare(0,0, Color.BLACK), new MyTriangle(0,0, Color.BLACK)};
+	
+	private ArrayList<ColorButton> colorButtons = new ArrayList<>();
+	private ArrayList<ShapeButton> shapeButtons = new ArrayList<>();
 
 	public SidePanel(int x, int y, Color color, Model model) {
 		this.setPrefWidth(x);
@@ -34,7 +29,9 @@ public class SidePanel extends VBox {
 		this.getChildren().add(colorLabel);
 
 		for (Color c : colors) {
-			this.getChildren().add(new ColorButton(c, model));
+			ColorButton b = new ColorButton(c, model, this);
+			colorButtons.add(b);
+			this.getChildren().add(b);
 		}
 
 		Label shapeLabel = new Label("Former");
@@ -42,9 +39,19 @@ public class SidePanel extends VBox {
 		this.getChildren().add(shapeLabel);
 		
 		for (Shape s : shapes) {
-			this.getChildren().add(new ShapeButton(s, model));
+			ShapeButton b = new ShapeButton(s, model, this);
+			shapeButtons.add(b);
+			this.getChildren().add(b);
 		}
 
+	}
+	
+	public ArrayList<ShapeButton> getShapeButtons() {
+		return shapeButtons;
+	}
+	
+	public ArrayList<ColorButton> getColorButtons() {
+		return colorButtons;
 	}
 
 }

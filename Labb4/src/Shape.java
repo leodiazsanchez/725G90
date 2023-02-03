@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 
 public abstract class Shape implements Serializable, Cloneable {
 
+	private static final long serialVersionUID = 1L;
 	private int width = 25;
 	private int height = 25;
 	private int x, y;

@@ -3,6 +3,8 @@ import javafx.scene.paint.Color;
 
 public class MyTriangle extends Shape {
 
+	private static final long serialVersionUID = 1L;
+
 	public MyTriangle(int x, int y, Color color) {
 		super(x, y, color);
 	}
