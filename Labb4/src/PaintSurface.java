@@ -12,6 +12,9 @@ public class PaintSurface extends Canvas {
 				this.draw((int) event.getX(), (int) event.getY());
 			} catch (NullPointerException npe) {
 				System.out.println("No shape selected");
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		
 		});
@@ -21,19 +24,22 @@ public class PaintSurface extends Canvas {
 				this.draw((int) event.getX(), (int) event.getY());
 			} catch (NullPointerException npe) {
 				System.out.println("No shape selected");
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		
 		});
 
 	}
 
-	public void draw(int x, int y) {
-		Shape shape = model.getShape();
+	public void draw(int x, int y) throws CloneNotSupportedException {
+		Shape shape = (Shape) model.getShape().clone();
 		shape.setX(x);
 		shape.setY(y);
 		shape.setColor(model.getColor());
 		model.getContents().add(shape);
-		//System.out.println(model.getContents());
+		System.out.println(shape);
 		shape.drawYourself(getGraphicsContext2D());
 
 	}

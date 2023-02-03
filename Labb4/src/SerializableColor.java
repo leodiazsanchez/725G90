@@ -13,6 +13,6 @@ public class SerializableColor implements Serializable {
 	}
 
 	public Color getColor() {
-		return Color.ALICEBLUE;
+		return Color.RED;
 	}
 }

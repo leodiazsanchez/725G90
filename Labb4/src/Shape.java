@@ -3,13 +3,13 @@ import java.io.Serializable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public abstract class Shape implements Serializable{
+public abstract class Shape implements Serializable, Cloneable {
 
 	private int width = 25;
 	private int height = 25;
-	private int x,y;
+	private int x, y;
 	private SerializableColor color;
-	
+
 	public Shape(int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
@@ -22,6 +22,10 @@ public abstract class Shape implements Serializable{
 		return height;
 	}
 
+	public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
+    }
 	public int getWidth() {
 		return width;
 	}
@@ -37,7 +41,7 @@ public abstract class Shape implements Serializable{
 	public int getY() {
 		return y;
 	}
-	
+
 	public void setX(int value) {
 		this.x = value;
 	}
@@ -47,9 +51,12 @@ public abstract class Shape implements Serializable{
 	}
 
 	public void setColor(Color color) {
-		this.color =  new SerializableColor(color);
-		
+		this.color = new SerializableColor(color);
+
 	}
 
+	public String toString() {
+		return (x + ":X " + y + ":Y");
+	}
 
 }
